@@ -1,366 +1,125 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ぬカニ｜4thAnniv.アニカフェ｜グッズ購入メモ</title>
+  <meta charset="UTF-8">
+  <title>What's the Total?</title>
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-color: #fff;
-}
-body { padding-bottom: 0; }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=RocknRoll+One&family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
 
-.main {
-  padding: 12px;
-  padding-bottom: 0;
-}
+  <style>
+    /* ===== 全体 ===== */
+    body {
+      margin: 0;
+      padding: 20px;
 
-.main-title {
-  text-align: center;
-  padding: 18px 10px;
-  background: #f8f8f8;
-}
-.main-title .anniv {
-  display: block;
-  font-size: 14px;
-}
-.main-title .title-main {
-  display: block;
-  font-size: 20px;
-  font-weight: 900;
-}
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.9;
+      letter-spacing: 0.03em;
+      color: #5d5246;
 
-h2 {
-  margin-top: 24px;
-  font-size: 18px;
-  border-left: 4px solid #e33;
-  padding-left: 8px;
-}
+      background: linear-gradient(135deg, #fff6fb, #f2f7ff);
+      background-attachment: fixed;
+    }
 
-.item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 0;
-  margin: 0;
-  border-bottom: 1px solid #eee;
-}
-.item:last-of-type {
-  border-bottom: none;
-}
+    /* ===== 中央カード ===== */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 24px 28px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
 
-label {
-  flex: 1;
-  font-size: 14px;
-}
-.price {
-  font-size: 12px;
-  color: #666;
-  margin-left: 6px;
-}
+    /* ===== 見出し ===== */
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 18px;
+    }
 
-input {
-  width: 40px;
-  text-align: center;
-  font-size: 16px;
-}
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
 
-/* 丸ボタン */
-.qty-btn,
-.save-btn,
-.reset-btn {
-  border-radius: 999px;
-}
+    /* ===== リスト ===== */
+    .link-list {
+      list-style: none;
+      padding: 0;
+    }
 
-.qty-btn {
-  width: 36px;
-  height: 36px;
-  font-size: 20px;
-  line-height: 36px;
-  padding: 0;
-}
+    .link-list li {
+      margin-bottom: 14px;
+    }
 
-.save-btn {
-  background: #e33;
-  color: #fff;
-  border: none;
-  padding: 8px 14px;
-}
+    .link-list a {
+      text-decoration: none;
+      color: #5b6fb8;
+      font-weight: 500;
+      transition: 0.2s;
+    }
 
-.reset-btn {
-  background: #aaa;
-  color: #fff;
-  border: none;
-  padding: 8px 14px;
-}
-.reset-btn:hover {
-  background: #888;
-}
+    .link-list a:hover {
+      color: #7f8fe0;
+      text-decoration: underline;
+    }
 
-/* 上部固定バー（2行対応） */
-.summary-fixed {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-bottom: 2px solid #e33;
-  padding: 10px 12px;
-  display: flex;
-  flex-wrap: wrap;       /* ← これで2行に折れる */
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  z-index: 10;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+    /* ===== 作成者 ===== */
+    .creator-info {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
 
-.summary-inline {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .creator-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+    }
 
-.bonus {
-  font-size: 12px;
-  color: #e33;
-}
-
-/* スマホ最適化（Xperia 5V 含む） */
-@media (max-width: 480px) {
-  .summary-fixed {
-    gap: 8px;
-    padding: 8px 8px;
-  }
-
-  .summary-inline {
-    font-size: 13px;
-  }
-
-  .bonus {
-    font-size: 11px;
-  }
-
-  .save-btn,
-  .reset-btn {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-
-  .qty-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 18px;
-  }
-}
-
-/* 作成者情報 */
-.creator {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  font-size: 11px;
-  color: #666;
-  margin-top: 16px;
-  margin-bottom: 32px;
-  padding: 8px;
-}
-.creator > a { justify-self: center; }
-.creator > div { justify-self: end; }
-
-.creator-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  gap: 4px;
-}
-.creator-link svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-</style>
+    .x-logo {
+      width: 1.1em;
+      height: 1.1em;
+      margin-right: 5px;
+      fill: #333;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="page">
 
-<h1 class="main-title">
-  <span class="anniv">🎉 4th anniversary 🎉</span>
-  <span class="title-main">アニカフェ</span>
-</h1>
+    <h1>What's the Total?</h1>
 
-<div class="summary-fixed">
-  <div class="summary-inline">
-    合計：<span id="totalQty">0</span>点 /
-    ¥<span id="totalPrice">0</span>
+    <ul class="link-list">
+      <li>
+        <a href="https://zuf2.github.io/anicafe4thaniv/">
+          NU: カーニバル 4th Anniversary @ アニカフェ
+        </a>
+      </li>
+    </ul>
+
+    <div class="creator-info">
+      作成者：
+      <a href="https://x.com" target="_blank" rel="noopener" class="creator-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="x-logo">
+          <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.594l-5.16-6.726-5.886 6.726H1.548l7.73-8.835L1.5 2.25h6.762l4.662 6.12 5.32-6.12Zm-1.16 17.52h1.833L7.62 4.125H5.655l11.43 15.645Z"/>
+        </svg>
+        <span>@zfu_2</span>
+      </a>
+    </div>
+
   </div>
-
-  <span class="bonus" id="bonusText">特典：0枚（2,000円毎に1枚）</span>
-
-  <button class="reset-btn" onclick="resetAll()">リセット</button>
-  <button class="save-btn" onclick="saveAsImage()">画像で保存</button>
-</div>
-
-<div class="main">
-  <h2>■ アクスタ ■</h2>
-  <div id="acrylic"></div>
-
-  <h2>■ フェイスタオル ■</h2>
-  <div id="towel"></div>
-
-  <h2>■ その他オープン商品 ■</h2>
-
-  <div class="item">
-    <label>シャドーボックス <span class="price">¥2,600</span></label>
-    <button class="qty-btn" onclick="changeQty('shadow',-1)">−</button>
-    <input id="shadow" type="number" value="0" readonly>
-    <button class="qty-btn" onclick="changeQty('shadow',1)">＋</button>
-  </div>
-
-  <div class="item">
-    <label>オリジナルボトル <span class="price">¥1,400</span></label>
-    <button class="qty-btn" onclick="changeQty('bottle',-1)">−</button>
-    <input id="bottle" type="number" value="0" readonly>
-    <button class="qty-btn" onclick="changeQty('bottle',1)">＋</button>
-  </div>
-
-  <h2>■ ランダム商品 ■</h2>
-  <div id="random"></div>
-
-  <h2>■ 店内飲食 ■</h2>
-  <div id="foodrink"></div>
-</div>
-
-<script>
-const PRICE = {
-  acrylic: 2000,
-  towel: 2500,
-  shadow: 2600,
-  bottle: 1400
-};
-
-const CHARACTERS = [
-  "エイト","八雲","エドモンド","オリビン","ケシー","玖夜","ガル","ブレイド","エンテン","レイ","エスター","モルフィス","ハシュト","リン"
-];
-
-const RANDOM_PRICE = {
-  "缶バッジ": 550,
-  "プレートカード": 600,
-  "ステッカー": 750,
-  "アニバカード": 900
-};
-
-const foodrink_PRICE = {
-  "フードメニュー": 1500,
-  "デザートメニュー": 1400,
-  "ドリンクメニュー": 900
-};
-
-function createGroup(targetId, prefix, price) {
-  const area = document.getElementById(targetId);
-  CHARACTERS.forEach(c => {
-    area.innerHTML += `
-      <div class="item">
-        <label>${c} <span class="price">¥${price.toLocaleString()}</span></label>
-        <button class="qty-btn" onclick="changeQty('${prefix}_${c}',-1)">−</button>
-        <input id="${prefix}_${c}" type="number" value="0" readonly>
-        <button class="qty-btn" onclick="changeQty('${prefix}_${c}',1)">＋</button>
-      </div>`;
-  });
-}
-
-function createRandom() {
-  const area = document.getElementById("random");
-  Object.keys(RANDOM_PRICE).forEach(r => {
-    area.innerHTML += `
-      <div class="item">
-        <label>${r} <span class="price">¥${RANDOM_PRICE[r].toLocaleString()}</span></label>
-        <button class="qty-btn" onclick="changeQty('rd_${r}',-1)">−</button>
-        <input id="rd_${r}" type="number" value="0" readonly>
-        <button class="qty-btn" onclick="changeQty('rd_${r}',1)">＋</button>
-      </div>`;
-  });
-}
-
-function createFoodrink() {
-  const area = document.getElementById("foodrink");
-  Object.keys(foodrink_PRICE).forEach(r => {
-    area.innerHTML += `
-      <div class="item">
-        <label>${r} <span class="price">¥${foodrink_PRICE[r].toLocaleString()}</span></label>
-        <button class="qty-btn" onclick="changeQty('fd_${r}',-1)">−</button>
-        <input id="fd_${r}" type="number" value="0" readonly>
-        <button class="qty-btn" onclick="changeQty('fd_${r}',1)">＋</button>
-      </div>`;
-  });
-}
-
-function changeQty(id, diff) {
-  const el = document.getElementById(id);
-  el.value = Math.max(0, Number(el.value) + diff);
-  calc();
-}
-
-function resetAll() {
-  document.querySelectorAll("input").forEach(el => el.value = 0);
-  calc();
-}
-
-function calc() {
-  let qty = 0, price = 0;
-
-  document.querySelectorAll("input").forEach(el => {
-    const v = Number(el.value);
-    if (!v) return;
-
-    qty += v;
-
-    if (el.id.startsWith("ac_")) price += v * PRICE.acrylic;
-    else if (el.id.startsWith("tw_")) price += v * PRICE.towel;
-    else if (el.id === "shadow") price += v * PRICE.shadow;
-    else if (el.id === "bottle") price += v * PRICE.bottle;
-    else if (el.id.startsWith("rd_")) price += v * RANDOM_PRICE[el.id.replace("rd_","")];
-    else if (el.id.startsWith("fd_")) price += v * foodrink_PRICE[el.id.replace("fd_","")];
-  });
-
-  document.getElementById("totalQty").textContent = qty;
-  document.getElementById("totalPrice").textContent = price.toLocaleString();
-
-  // ★ 特典枚数の自動計算
-  document.getElementById("bonusText").textContent =
-    `特典：${Math.floor(price / 2000)}枚（2,000円毎に1枚）`;
-}
-
-createGroup("acrylic","ac",PRICE.acrylic);
-createGroup("towel","tw",PRICE.towel);
-createRandom();
-createFoodrink();
-calc();
-</script>
-
-<div class="creator">
-  <a href="https://twitter.com/intent/tweet?url=https://sites.google.com/view/zfu2-minmin/4th-anniv-animate-cafe&text=ぬカニのアニカフェ、グッズ購入メモ使ってみてね！" target="_blank" rel="noopener" class="creator-link">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.594l-5.16-6.726-5.886 6.726H1.548l7.73-8.835L1.5 2.25h6.762l4.662 6.12 5.32-6.12Zm-1.16 17.52h1.833L7.62 4.125H5.655l11.43 15.645Z"/>
-    </svg>
-    <span>シェア</span>
-  </a>
-
-  <div>
-    作成者：
-    <a href="https://x.com" target="_blank" rel="noopener" class="creator-link">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.594l-5.16-6.726-5.886 6.726H1.548l7.73-8.835L1.5 2.25h6.762l4.662 6.12 5.32-6.12Zm-1.16 17.52h1.833L7.62 4.125H5.655l11.43 15.645Z"/>
-      </svg>
-      <span>@zfu_2</span>
-    </a>
-  </div>
-</div>
-
 </body>
 </html>
